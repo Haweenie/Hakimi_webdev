@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        <div class="header">
+            <header>
+                <h1>Bass Guitar</h1>
+            </header>
+            <a href="index.html" class="button1">About</a>
+            <a href="history.html" class="button1">History of Bass</a>
+            <a href="types.html" class="button1">Types of Bass</a>
+            <a href="players.html" class="button1">Famous Bass Players</a>
+        </div>
+
+        <div class="content">
+            <div class="pbox1" id="about">
+                <h3>What is a bass guitar?</h3>
+                <p>The bass guitar, electric bass or simply bass, is the lowest-pitched member of the guitar family. It is a plucked string instrument similar in appearance and construction to an electric or acoustic guitar, but with a longer neck and scale length, and typically four to six strings or courses.  </p>
+                <h3>Iconic Bass Guitars</h3>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="column1">
+                <img src="images/Fender_Duff_McKagan_PBass.jpg" style="width:100%"onclick="openModal();currentSlide(1)" class="hover-shadow">
+            </div>
+            <div class="column1">
+                <img src="images/eb-0.jpg" style="width:100%" onclick="openModal();currentSlide(2)" class="hover-shadow">
+            </div>
+            <div class="column1">
+                <img src="images/hofner_500-1.jpg" style="width:100%" onclick="openModal();currentSlide(3)" class="hover-shadow">
+            </div>
+            <div class="column1">
+                <img src="images/SB-1000_Aria_Guitars.jpg" style="width:100%" onclick="openModal();currentSlide(4)" class="hover-shadow">
+            </div>
+        </div>
+          
+        <!-- The Modal/Lightbox -->
+        <div id="myModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal-content">
+          
+                <div class="mySlides">
+                    <div class="numbertext">1 / 4</div>
+                    <img src="images/Fender_Duff_McKagan_PBass.jpg"  style="width:100%" >
+                </div>
+          
+                <div class="mySlides">
+                    <div class="numbertext">2 / 4</div>
+                    <img src="images/eb-0.jpg"  style="width:100%" >
+                </div>
+          
+                <div class="mySlides">
+                    <div class="numbertext">3 / 4</div>
+                    <img src="images/hofner_500-1.jpg"  style="width:100%" >
+                </div>
+          
+                <div class="mySlides">
+                    <div class="numbertext">4 / 4</div>
+                    <img src="images/SB-1000_Aria_Guitars.jpg"  style="width:100%" >
+                </div>
+          
+                <!-- Next/previous controls -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          
+                <!-- Caption text -->
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+          
+                <!-- Thumbnail image controls -->
+                <div class="column">
+                    <img class="demo" src="images/Fender_Duff_McKagan_PBass.jpg"   style="width:100%"  onclick="currentSlide(1)" alt="Precision bass guitar made by Fender in collaboration with Duff McKagan, bassist of Guns N' Roses">
+                </div>
+          
+                <div class="column">
+                    <img class="demo" src="images/eb-0.jpg"  style="width:100%"  onclick="currentSlide(2)" alt="The EB-0 was introduced in 1959 as the first solid-body bass by Gibson">
+                </div>
+          
+                <div class="column">
+                    <img class="demo" src="images/hofner_500-1.jpg"  style="width:100%"  onclick="currentSlide(3)" alt="The Hofner 500/1, the bass played by Paul McCartney of the Beatles">
+                </div>
+          
+                <div class="column">
+                    <img class="demo" src="images/SB-1000_Aria_Guitars.jpg"  style="width:100%"  onclick="currentSlide(4)" alt="The SB-1000 Black and Gold. A custom one was used by Cliff Burton from Metallica">
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>
+                Done by Hakimi
+            </p>
+        </div>
+        <script src="script.js"> defer</script>
+    </body>
+</html>
