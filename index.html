@@ -1,100 +1,119 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | CloudPrac</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width=960 height=600></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">CloudPrac</div>
+      </div>
+    </div>
+    <script>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
 
-        <div class="header">
-            <header>
-                <h1>Bass Guitar</h1>
-            </header>
-            <a href="index.html" class="button1">About</a>
-            <a href="history.html" class="button1">History of Bass</a>
-            <a href="types.html" class="button1">Types of Bass</a>
-            <a href="players.html" class="button1">Famous Bass Players</a>
-        </div>
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
+      }
 
-        <div class="content">
-            <div class="pbox1" id="about">
-                <h3>What is a bass guitar?</h3>
-                <p>The bass guitar, electric bass or simply bass, is the lowest-pitched member of the guitar family. It is a plucked string instrument similar in appearance and construction to an electric or acoustic guitar, but with a longer neck and scale length, and typically four to six strings or courses.  </p>
-                <h3>Iconic Bass Guitars</h3>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="column1">
-                <img src="images/Fender_Duff_McKagan_PBass.jpg" style="width:100%"onclick="openModal();currentSlide(1)" class="hover-shadow">
-            </div>
-            <div class="column1">
-                <img src="images/eb-0.jpg" style="width:100%" onclick="openModal();currentSlide(2)" class="hover-shadow">
-            </div>
-            <div class="column1">
-                <img src="images/hofner_500-1.jpg" style="width:100%" onclick="openModal();currentSlide(3)" class="hover-shadow">
-            </div>
-            <div class="column1">
-                <img src="images/SB-1000_Aria_Guitars.jpg" style="width:100%" onclick="openModal();currentSlide(4)" class="hover-shadow">
-            </div>
-        </div>
-          
-        <!-- The Modal/Lightbox -->
-        <div id="myModal" class="modal">
-            <span class="close cursor" onclick="closeModal()">&times;</span>
-            <div class="modal-content">
-          
-                <div class="mySlides">
-                    <div class="numbertext">1 / 4</div>
-                    <img src="images/Fender_Duff_McKagan_PBass.jpg"  style="width:100%" >
-                </div>
-          
-                <div class="mySlides">
-                    <div class="numbertext">2 / 4</div>
-                    <img src="images/eb-0.jpg"  style="width:100%" >
-                </div>
-          
-                <div class="mySlides">
-                    <div class="numbertext">3 / 4</div>
-                    <img src="images/hofner_500-1.jpg"  style="width:100%" >
-                </div>
-          
-                <div class="mySlides">
-                    <div class="numbertext">4 / 4</div>
-                    <img src="images/SB-1000_Aria_Guitars.jpg"  style="width:100%" >
-                </div>
-          
-                <!-- Next/previous controls -->
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-          
-                <!-- Caption text -->
-                <div class="caption-container">
-                    <p id="caption"></p>
-                </div>
-          
-                <!-- Thumbnail image controls -->
-                <div class="column">
-                    <img class="demo" src="images/Fender_Duff_McKagan_PBass.jpg"   style="width:100%"  onclick="currentSlide(1)" alt="Precision bass guitar made by Fender in collaboration with Duff McKagan, bassist of Guns N' Roses">
-                </div>
-          
-                <div class="column">
-                    <img class="demo" src="images/eb-0.jpg"  style="width:100%"  onclick="currentSlide(2)" alt="The EB-0 was introduced in 1959 as the first solid-body bass by Gibson">
-                </div>
-          
-                <div class="column">
-                    <img class="demo" src="images/hofner_500-1.jpg"  style="width:100%"  onclick="currentSlide(3)" alt="The Hofner 500/1, the bass played by Paul McCartney of the Beatles">
-                </div>
-          
-                <div class="column">
-                    <img class="demo" src="images/SB-1000_Aria_Guitars.jpg"  style="width:100%"  onclick="currentSlide(4)" alt="The SB-1000 Black and Gold. A custom one was used by Cliff Burton from Metallica">
-                </div>
-            </div>
-        </div>
-        <div class="footer">
-            <p>
-                Done by Hakimi
-            </p>
-        </div>
-        <script src="script.js"> defer</script>
-    </body>
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Build.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Build.data",
+        frameworkUrl: buildUrl + "/Build.framework.js",
+        codeUrl: buildUrl + "/Build.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Hakimi",
+        productName: "CloudPrac",
+        productVersion: "1.0",
+        showBanner: unityShowBanner,
+      };
+
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+        unityShowBanner('WebGL builds are not supported on mobile devices.');
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
+  </body>
 </html>
